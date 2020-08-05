@@ -1,24 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Hyperlink.Core;
+using Hyperlink.Worker.ControlPanel;
+using Hyperlink.Worker.ControlPanel.Extensions;
+using Hyperlink.Worker.Game;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace Hyperlink
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            await CreateHostBuilder(args).Build().RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    services.AddSingleton(services);
+
+                    services.AddCoreServices();
+
+                    services.AddControlPanelServices();
+
+                    services.AddHostedService<GameWorker>();
+                    services.AddHostedService<ControlPanelWorker>();
                 });
     }
 }

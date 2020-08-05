@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,5 +7,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hyperlink.Core\Hyperlink.Core.csproj" />
+    <ProjectReference Include="..\Hyperlink.Worker.ControlPanel\Hyperlink.Worker.ControlPanel.csproj" />
+    <ProjectReference Include="..\Hyperlink.Worker.Game\Hyperlink.Worker.Game.csproj" />
   </ItemGroup>
 </Project>
