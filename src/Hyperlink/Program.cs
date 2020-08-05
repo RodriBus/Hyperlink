@@ -17,16 +17,17 @@ namespace Hyperlink
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddSingleton(services);
+            .UseWindowsService()
+            .ConfigureServices((hostContext, services) =>
+            {
+                services.AddSingleton(services);
 
-                    services.AddCoreServices();
+                services.AddCoreServices();
 
-                    services.AddControlPanelServices();
+                services.AddControlPanelServices();
 
-                    services.AddHostedService<GameWorker>();
-                    services.AddHostedService<ControlPanelWorker>();
-                });
+                services.AddHostedService<GameWorker>();
+                services.AddHostedService<ControlPanelWorker>();
+            });
     }
 }
